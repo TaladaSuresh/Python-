@@ -1,1 +1,32 @@
 
+POSITIVE={"good","clean","fast","helpful","improved"}
+NEGATIVE={"bad","dirty","slow","rude","smoke","broken"}
+NEGATORS={"not","never","no"}
+
+def score(text):
+ words=text.lower().replace(",","").replace(".","").replace("!","").split()
+ total=0
+ flip=False
+ for w in words:
+  if w in NEGATORS:
+   flip=not flip
+  elif w in POSITIVE:
+   total+=-1 if flip else 1
+   flip=False
+  elif w in NEGATIVE:
+   total+=1 if flip else -1
+   flip=False
+ return total
+
+def label(text):
+ s=score(text)
+ return "positive" if s>0 else "negative" if s<0 else "neutral"
+
+for c in [
+ "Roads are clean and the bus was fast.",
+ "Smoke from the factory, air is bad.",
+ "The staff were not helpful.",
+ "Not bad, service improved."
+]:
+ print(label(c),"|",c)
+
