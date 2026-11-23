@@ -1,1 +1,21 @@
+fat = float(input("Enter Fat: "))
+snf = float(input("Enter SNF: "))
+litres = float(input("Enter 10 days milk litres: "))
+month = int(input("Enter month (1-12): "))
 
+if 4 <= month <= 6:
+    base_rate = 32.00
+else:
+    base_rate = 30.00
+
+rate = base_rate + (fat * 0.45)
+
+if litres > 500:
+    rate = rate + 0.50
+
+amount = rate * litres
+
+print("Fat:", fat)
+print("SNF:", snf)
+print("Milk Rate: Rs.", round(rate, 2))
+print("Total Amount: Rs.", round(amount, 2))
